@@ -22,7 +22,10 @@ Bun.serve({
     let path = url.pathname;
 
     if (path === "/") {
-        path = "/testcard/index.html";
+        path = "/projects/testcard1/index.html";
+    } else if (path.endsWith("/")) {
+        // Serve index.html for directory requests
+        path = path + "index.html";
     }
 
     const filePath = `.${path}`;
@@ -43,7 +46,7 @@ Bun.serve({
           return new Response(`Build error: ${result.logs.join('\n')}`, { status: 500 });
         }
         
-        const transpiled = await result.outputs[0].text();
+        const transpiled = await result.outputs[0]!.text();
         
         return new Response(transpiled, {
           headers: { "Content-Type": "application/javascript" }
