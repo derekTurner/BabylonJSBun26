@@ -7,13 +7,17 @@ import {
   HemisphericLight,
   DirectionalLight,
   PointLight,
+  SpotLight,
   MeshBuilder,
+  Mesh,
+  StandardMaterial,
   ShadowGenerator
 } from "@babylonjs/core";
 
 function createBox(scene: Scene) {
   let box = MeshBuilder.CreateBox("box", { size: 1 }, scene);
-  box.position.y = 3;
+  box.position.y = 0.0;
+  box.position.y = 0.501
   return box;
 }
 
@@ -31,20 +35,28 @@ function createHemisphericLight(scene: Scene) {
 }
 
 function createDirectionalLight(scene: Scene) {
-  const light = new DirectionalLight("light", new Vector3(0.2, -1, 0.2), scene);
+  const light = new DirectionalLight("light", new Vector3(0.5, -0.5, 0.2), scene);
   light.position = new Vector3(20, 40, 10);
-  light.intensity = 0.5;
-  light.diffuse = new Color3(0, 0.6, 0.5);
+  light.intensity = 0.7;
+  light.diffuse = new Color3(0.6, 0, 0);
   light.specular = new Color3(0, 0.7, 0.3);
   return light;
 }
 
 function createPointLight(scene: Scene ){
-    const light = new PointLight("light", new Vector3(-1, 1, 0),scene);
-    light.position = new Vector3(5, 20, 10);
-    light.intensity = 0.3;
+    const light = new PointLight("light", new Vector3(-2.5, 0.2, 0.5),scene);
+    light.intensity = 0.5;
     light.diffuse = new Color3(0.5, 1, 1);
     light.specular = new Color3(0.8, 1, 1);
+    return light;
+}
+
+function createSpotLight(scene: Scene ){
+    const light = new SpotLight("light", new Vector3(2, 1, -3), 
+        new Vector3(0, -2, 3), Math.PI / 3, 20, scene);
+    light.intensity = 1.0;
+    light.diffuse = new Color3(1, 0, 0);
+    light.specular = new Color3(0, 1, 0);
     return light;
 }
 
@@ -69,18 +81,17 @@ function createSphere(scene: Scene) {
     { diameter: 2, segments: 32 },
     scene,
   );
-  sphere.position.y = 1;
+  sphere.position.y = 2;
   return sphere;
 }
 
-function createGround(scene: Scene) {
-  let ground = MeshBuilder.CreateGround(
-    "ground",
-    { width: 6, height: 6 },
-    scene,
-  );
-  ground.receiveShadows = true;
-  return ground;
+function createGround(scene: Scene){
+    let ground = MeshBuilder.CreateGround("ground", { width: 6, height: 6 }, scene);
+    var groundMaterial = new StandardMaterial("groundMaterial", scene);
+    groundMaterial.backFaceCulling = false;
+    ground.material = groundMaterial;
+    ground.receiveShadows = true;
+    return ground;
 }
 
 function createArcRotateCamera(scene: Scene) {
@@ -104,6 +115,8 @@ export function createStartScene(engine: Engine) {
   let myscene: Scene = new Scene(engine);
   let box = createBox(myscene);
   createHemisphericLight(myscene);
+  createPointLight(myscene);
+  createSpotLight(myscene);
   let dl = createDirectionalLight(myscene);
   let sphere = createSphere(myscene);
   createGround(myscene);
