@@ -10,8 +10,11 @@ import {
   SpotLight,
   MeshBuilder,
   Mesh,
+  PBRMaterial,
+  RectAreaLight,
   StandardMaterial,
-  ShadowGenerator
+  ShadowGenerator,
+  TransformNode
 } from "@babylonjs/core";
 
 function createBox(scene: Scene) {
@@ -60,6 +63,51 @@ function createSpotLight(scene: Scene ){
     return light;
 }
 
+
+function createRectAreaLight(scene: Scene) {
+    const target = Vector3.Zero();
+    const lightRoot = new TransformNode("areaLightRoot", scene);
+    const light = new RectAreaLight(
+        "areaLight",
+        Vector3.Zero(),
+        3,
+        3,
+        scene
+    );
+
+    const plane = MeshBuilder.CreatePlane(
+        "debugLight",
+        { size: 3 },
+        scene
+    );
+
+    // Parent both to the same transform
+    light.parent = lightRoot;
+    plane.parent = lightRoot;
+
+    // Light settings
+    light.intensity = 20;
+    light.diffuse = new Color3(0.7, 0.7, 1);
+    light.specular = new Color3(0.1, 0.3, 1);
+
+    // Make plane match the light color
+    const planeMat = new StandardMaterial("debugLightMat", scene);
+    planeMat.emissiveColor = light.diffuse.clone();
+    planeMat.backFaceCulling = false;       
+    plane.material = planeMat;
+
+    // Position
+    lightRoot.position.set(0, 5, -5);
+
+    // Aim at scene centre
+    lightRoot.lookAt(target);
+
+    // Since the light emits backwards relative to the plane:
+    lightRoot.rotate(Vector3.Up(), Math.PI);
+
+    return light;
+}
+
 function createShadows(light: DirectionalLight, sphere: Mesh ,box: Mesh){
     const shadower = new ShadowGenerator(1024, light);
     const sm : any = shadower.getShadowMap();
@@ -82,13 +130,21 @@ function createSphere(scene: Scene) {
     scene,
   );
   sphere.position.y = 2;
+
+  const sphereMat = new PBRMaterial("sphereMat", scene);
+  sphereMat.metallic = 0.0;
+  sphereMat.roughness = 0.2;
+  sphereMat.albedoColor = Color3.White();
+
+  sphere.material = sphereMat;
   return sphere;
 }
 
 function createGround(scene: Scene){
     let ground = MeshBuilder.CreateGround("ground", { width: 6, height: 6 }, scene);
-    var groundMaterial = new StandardMaterial("groundMaterial", scene);
+    const groundMaterial = new PBRMaterial("groundMaterial", scene);
     groundMaterial.backFaceCulling = false;
+    groundMaterial.roughness = 0.8;
     ground.material = groundMaterial;
     ground.receiveShadows = true;
     return ground;
@@ -118,6 +174,7 @@ export function createStartScene(engine: Engine) {
   createPointLight(myscene);
   createSpotLight(myscene);
   let dl = createDirectionalLight(myscene);
+  createRectAreaLight(myscene);
   let sphere = createSphere(myscene);
   createGround(myscene);
   createArcRotateCamera(myscene);
