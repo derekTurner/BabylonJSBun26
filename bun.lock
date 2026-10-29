@@ -5,6 +5,7 @@
     "": {
       "dependencies": {
         "@babylonjs/core": "^9.31.1",
+        "@babylonjs/gui": "^9.31.1",
         "@babylonjs/havok": "^1.3.14",
         "@babylonjs/inspector": "^9.31.1",
         "@babylonjs/loaders": "^9.31.1",
@@ -22,7 +23,7 @@
 
     "@babylonjs/core": ["@babylonjs/core@9.31.1", "", {}, "sha512-26ld4zESbSjGiqut36ddv/8noxglatO59Cs+5rbSjK+BhZ6RkvUWUYjQBKAB8ekjgvuykNA6oZ4lXGOR7BowaQ=="],
 
-    "@babylonjs/gui": ["@babylonjs/gui@9.13.0", "", { "peerDependencies": { "@babylonjs/core": "^9.0.0" } }, "sha512-DSx1NwbCydjMEs0/+3s5VPGRgO/z4tzc1/VnTCfBnNvNvG9/9PsVQjEs0OU4Wy5v6ruwzIZH9YrTn5GEba1dOQ=="],
+    "@babylonjs/gui": ["@babylonjs/gui@9.32.1", "", { "peerDependencies": { "@babylonjs/core": "^9.0.0" } }, "sha512-W1ObCljVZCsDRUgezB96TyiCh8WEK0OKB2+CJU2//l4hmajSAFAhR4h+DLKdB0Mw4VQWTcyO3i6gowCgXnkeaQ=="],
 
     "@babylonjs/gui-editor": ["@babylonjs/gui-editor@9.13.0", "", { "peerDependencies": { "@babylonjs/core": "^9.0.0", "@babylonjs/gui": "^9.0.0", "@types/react": ">=16.7.3", "@types/react-dom": ">=16.0.9" } }, "sha512-npDsCO1CK1ZQq+TZWennDJHtXbGWOfAX4nbC/R/Tl9NGFwD7PAkRi78Gzm9UAsCBPnW20CE2GbXM5N2eT28t9w=="],
 
