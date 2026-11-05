@@ -12,9 +12,8 @@ import {
   Camera,
   Engine,
   MeshAssetTask,
-  AbstractMesh,
 } from "@babylonjs/core";
-import { taaPixelShader } from "@babylonjs/core/Shaders/taa.fragment";
+
 
 function createLight(scene: Scene) {
   const light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
