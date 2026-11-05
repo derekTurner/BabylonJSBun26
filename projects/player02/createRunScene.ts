@@ -1,6 +1,4 @@
-import {} from "@babylonjs/core";
-
-import { SceneData } from "./interfaces";
+import type { SceneData } from "./interfaces";
 
 export default function createRunScene(runScene: SceneData) {
  

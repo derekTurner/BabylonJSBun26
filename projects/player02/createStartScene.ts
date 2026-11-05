@@ -2,6 +2,7 @@
 //import "@babylonjs/inspector";
 import "@babylonjs/loaders/glTF/2.0";
 import HavokPhysics, { type HavokPhysicsWithBindings } from "@babylonjs/havok";
+import { getHavok } from "./havok";
 import {
   Scene,
   ArcRotateCamera,
@@ -132,8 +133,9 @@ export default async function createStartScene(engine: Engine) {
   });
 
   const havokInstance: HavokPhysicsWithBindings = await HavokPhysics();
-  const hk: HavokPlugin = new HavokPlugin(true, havokInstance);
-  that.scene.enablePhysics(new Vector3(0, -9.81, 0), hk);
+  //const hk: HavokPlugin = new HavokPlugin(true, havokInstance);
+  const hk = await getHavok();
+  that.scene.enablePhysics(new Vector3(0, -9.81, 0), new HavokPlugin(true, hk));
 
   //that.scene.debugLayer.show();
 

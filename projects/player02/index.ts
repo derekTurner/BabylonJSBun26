@@ -1,6 +1,7 @@
 import { Engine } from "@babylonjs/core";
 import createStartScene from "./createStartScene";
 import createRunScene from "./createRunScene";
+import {createCharacterController} from "./createCharacterController";
 //import { ShowInspector } from "@babylonjs/inspector";
 import './main.css';
 
@@ -20,10 +21,15 @@ document.body.style.margin = "0";
 document.body.appendChild(canvas);
 
 let eng = new Engine(canvas, true, {}, true);
-let startScene = createStartScene(eng);
-createRunScene(startScene);
 
-eng.runRenderLoop(() => {
-  startScene.scene.render();
-});     
-//ShowInspector(startScene);
+async function main() {
+  const startScene = await createStartScene(eng);
+  createCharacterController(startScene.scene);
+  createRunScene(startScene);
+
+  eng.runRenderLoop(() => {
+    startScene.scene.render();
+  });
+}
+
+void main();
