@@ -1,7 +1,5 @@
 //import "@babylonjs/core/Debug/debugLayer";
 //import "@babylonjs/inspector";
-import "@babylonjs/loaders/glTF/2.0";
-import HavokPhysics, { type HavokPhysicsWithBindings } from "@babylonjs/havok";
 import { getHavok } from "./havok";
 import {
   Scene,
@@ -11,7 +9,6 @@ import {
   HemisphericLight,
   MeshBuilder,
   Mesh,
-  Camera,
   Engine,
   HavokPlugin,
   PhysicsAggregate,
@@ -210,20 +207,20 @@ function addAssets(scene: Scene, sceneData: SceneData) {
 
 
 export default async function createStartScene(engine: Engine) {
+  interface SceneData {
+    scene: Scene;
+    light?: HemisphericLight;
+    ground?: PhysicsAggregate;
+    camera?: ArcRotateCamera;
+    box1?:Mesh;
+    box2?:Mesh;
+  }  
+  
   const that: SceneData = { scene: new Scene(engine) };
 
-  let initializedHavok: any;
-
-  HavokPhysics().then((havok) => {
-    initializedHavok = havok;
-  });
-
-  const havokInstance: HavokPhysicsWithBindings = await HavokPhysics();
-  //const hk: HavokPlugin = new HavokPlugin(true, havokInstance);
-  const hk = await getHavok();
-  that.scene.enablePhysics(new Vector3(0, -9.81, 0), new HavokPlugin(true, hk));
-
-
+    const hk = await getHavok();
+    that.scene.enablePhysics(new Vector3(0, -9.81, 0), new HavokPlugin(true, hk));
+  
   //that.scene.debugLayer.show();
 
   that.light = createLight(that.scene);

@@ -1,7 +1,5 @@
 //import "@babylonjs/core/Debug/debugLayer";
 //import "@babylonjs/inspector";
-import "@babylonjs/loaders/glTF/2.0";
-import HavokPhysics, { type HavokPhysicsWithBindings } from "@babylonjs/havok";
 import { getHavok } from "./havok";
 import {
   Scene,
@@ -119,7 +117,7 @@ function addAssets(scene: Scene) {
     "CommonTree_1.gltf"
   );
   tree1.onSuccess = function (task) {
-    const root = task.loadedMeshes[0];
+    const root = task.loadedMeshes[0]!;
     const tree1Clone = root.clone("tree1_clone", null);
     // tree1
     root.position = new Vector3(5, 0, 2);
@@ -142,7 +140,7 @@ function addAssets(scene: Scene) {
     "CommonTree_2.gltf"
   );
   tree2.onSuccess = function (task) {
-    const root = task.loadedMeshes[0];
+    const root = task.loadedMeshes[0]!;
     const tree2Clone = root.clone("tree1_clone", null);
     root.position = new Vector3(0, 0, 2);
     root.scaling = new Vector3(0.85, 0.85, 0.85);
@@ -162,7 +160,7 @@ function addAssets(scene: Scene) {
     "CommonTree_3.gltf"
   );
   tree3.onSuccess = function (task) {
-    const root = task.loadedMeshes[0];
+    const root = task.loadedMeshes[0]!;
     const tree3Clone = root.clone("tree3_clone", null);
     root.position = new Vector3(-5, 0, 2);
     root.scaling = new Vector3(0.9, 0.9, 0.9);
@@ -199,17 +197,9 @@ export default async function createStartScene(engine: Engine) {
 
   let that: SceneData = { scene: new Scene(engine) };
 
-  let initializedHavok: any;
 
-  HavokPhysics().then((havok) => {
-    initializedHavok = havok;
-  });
-
-  const havokInstance: HavokPhysicsWithBindings = await HavokPhysics();
-  //const hk: HavokPlugin = new HavokPlugin(true, havokInstance);
   const hk = await getHavok();
   that.scene.enablePhysics(new Vector3(0, -9.81, 0), new HavokPlugin(true, hk));
-
 
   //that.scene.debugLayer.show();
 

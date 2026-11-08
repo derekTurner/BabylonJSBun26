@@ -1,7 +1,6 @@
 //import "@babylonjs/core/Debug/debugLayer";
 //import "@babylonjs/inspector";
 import "@babylonjs/loaders/glTF/2.0";
-import HavokPhysics, { type HavokPhysicsWithBindings } from "@babylonjs/havok";
 import { getHavok } from "./havok";
 import {
   Scene,
@@ -14,14 +13,9 @@ import {
   Camera,
   Engine,
   HavokPlugin,
-  PhysicsCharacterController,
-  Quaternion,
-  CharacterSupportedState,
-  KeyboardEventTypes,
   PhysicsAggregate,
   PhysicsShapeType,
 } from "@babylonjs/core";
-import { taaPixelShader } from "@babylonjs/core/Shaders/taa.fragment";
 
 
 
@@ -37,8 +31,7 @@ function createGround(scene: Scene) {
     { width: 16, height: 16 },
     scene
   );
-  
-    // Create a static box shape.
+// Create a static box shape.
   let groundAggregate = new PhysicsAggregate(ground, PhysicsShapeType.BOX, { mass: 0 }, scene);
   return ground;
 }
@@ -126,14 +119,6 @@ export default async function createStartScene(engine: Engine) {
 
   let that: SceneData = { scene: new Scene(engine) };
 
-  let initializedHavok: any;
-
-  HavokPhysics().then((havok) => {
-    initializedHavok = havok;
-  });
-
-  const havokInstance: HavokPhysicsWithBindings = await HavokPhysics();
-  //const hk: HavokPlugin = new HavokPlugin(true, havokInstance);
   const hk = await getHavok();
   that.scene.enablePhysics(new Vector3(0, -9.81, 0), new HavokPlugin(true, hk));
 
