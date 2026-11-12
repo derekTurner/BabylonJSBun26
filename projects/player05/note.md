@@ -1,1 +1,1 @@
-Trying to add farmer in place of cylinder.
+Gui feature added.  Collisions register on gui.

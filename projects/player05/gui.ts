@@ -18,7 +18,6 @@ function createSceneButton(
   index: string,
   x: string,
   y: string,
-  //advtex: { addControl: (arg0: Button) => void }
 ) {
   var button: Button = Button.CreateSimpleButton(name, index);
   button.left = x;
@@ -79,9 +78,7 @@ export function gui(sceneData: SceneData): void {
     "Click Me!",
     "0px",
     "0px",
-    //advancedTexture
   );
-  //advancedTexture.addControl(button1); // button 1 could be added to the scene or grid
 
   //add text block
   //https://playground.babylonjs.com/#2ARI2W#10 //high resolution text//
@@ -95,7 +92,6 @@ export function gui(sceneData: SceneData): void {
   text3 = createTextBlock("text3", "Debug", "1px", "1px");
   text4 = createTextBlock("text4", "Debug", "1px", "1px");
 
-  // advancedTexture.addControl(this.heading1); // text1 block could be added to the scene or grid
 
   //https://doc.babylonjs.com/features/featuresDeepDive/gui/gui#grid
   // Create a grid, Pointer will then only apply to the grid and not the whole screen.
