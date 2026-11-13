@@ -39,10 +39,10 @@ const collideCB1 = (collision: {
 export function setupCollisions(sceneData: SceneData): void {
   // Collision filter groups
   const FILTER_GROUP_GROUND = 1;
-  const FILTER_GROUP_PLATFORM = 2;
+  //const FILTER_GROUP_PLATFORM = 2; // unused in this example
   const FILTER_GROUP_CUBE = 3;
-  const FILTER_GROUP_OBSTACLE = 4;
-  const FILTER_GROUP_PLAYER = 5;
+  //const FILTER_GROUP_OBSTACLE = 4; // unused in this example
+  //const FILTER_GROUP_PLAYER = 5; // unused in this example
 
   // Apply masks and collisions to physics agggregates
   if (sceneData.ground) {

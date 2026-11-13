@@ -136,7 +136,7 @@ function addAssets(scene: Scene, sceneData: SceneData) {
   const tree1 = assetsManager.addMeshTask(
     "tree1 task",
     "",
-    "./assets/nature/gltf/",
+    "./assets/nature/glTF/",
     "CommonTree_1.gltf",
   );
   tree1.onSuccess = function (task) {
@@ -157,7 +157,7 @@ function addAssets(scene: Scene, sceneData: SceneData) {
   const tree2 = assetsManager.addMeshTask(
     "tree2 task",
     "",
-    "./assets/nature/gltf/",
+    "./assets/nature/glTF/",
     "CommonTree_2.gltf",
   );
   tree2.onSuccess = function (task) {
@@ -177,7 +177,7 @@ function addAssets(scene: Scene, sceneData: SceneData) {
   const tree3 = assetsManager.addMeshTask(
     "tree3 task",
     "",
-    "./assets/nature/gltf/",
+    "./assets/nature/glTF/",
     "CommonTree_3.gltf",
   );
   tree3.onSuccess = function (task) {
@@ -194,7 +194,7 @@ function addAssets(scene: Scene, sceneData: SceneData) {
     mergeAndAggregate(cloneMeshes, scene);
   };
 
-  const farmer: MeshAssetTask = assetsManager.addMeshTask(
+ const farmer: MeshAssetTask = assetsManager.addMeshTask(
     "farmer task",
     "",
     "./assets/men/",
@@ -224,29 +224,24 @@ function addAssets(scene: Scene, sceneData: SceneData) {
   return assetsManager;
 }
 
-export default async function createStartScene(engine: Engine) {
-  interface SceneData {
-    scene: Scene;
-    light?: HemisphericLight;
-    ground?: PhysicsAggregate;
-    camera?: ArcRotateCamera;
-    box1?: PhysicsAggregate;
-    box2?: PhysicsAggregate;
-  }
 
-  const that: SceneData = { scene: new Scene(engine) };
+export default async function createStartScene(engine: Engine) {
+  const sceneData: SceneData = { scene: new Scene(engine) };
 
   const hk = await getHavok();
-  that.scene.enablePhysics(new Vector3(0, -9.81, 0), new HavokPlugin(true, hk));
+  sceneData.scene.enablePhysics(
+    new Vector3(0, -9.81, 0),
+    new HavokPlugin(true, hk),
+  );
 
-  //that.scene.debugLayer.show();
+  //sceneData.scene.debugLayer.show();
 
-  that.light = createLight(that.scene);
-  that.ground = createGround(that.scene);
-  that.camera = createArcRotateCamera(that.scene);
-  that.box1 = createBox1(that.scene);
-  that.box2 = createBox2(that.scene);
-  const assetsManager = addAssets(that.scene, that);
+  sceneData.light = createLight(sceneData.scene);
+  sceneData.ground = createGround(sceneData.scene);
+  sceneData.camera = createArcRotateCamera(sceneData.scene);
+  sceneData.box1 = createBox1(sceneData.scene);
+  sceneData.box2 = createBox2(sceneData.scene);
+  const assetsManager = addAssets(sceneData.scene, sceneData);
   assetsManager.load();
-  return that;
+  return sceneData;
 }

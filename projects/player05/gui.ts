@@ -81,11 +81,6 @@ export function gui(sceneData: SceneData): void {
   );
 
   //add text block
-  //https://playground.babylonjs.com/#2ARI2W#10 //high resolution text//
-  scene.getEngine().setHardwareScalingLevel(1 / window.devicePixelRatio);
-  advancedTexture.rootContainer.scaleX = window.devicePixelRatio;
-  advancedTexture.rootContainer.scaleY = window.devicePixelRatio;
-
   heading1 = createTextBlock("heading1", "Hello World", "1px", "1px");
   text1 = createTextBlock("text1", "Debug", "1px", "1px");
   text2 = createTextBlock("text2", "Debug", "1px", "1px");
