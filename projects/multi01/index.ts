@@ -1,8 +1,8 @@
 import { Engine} from "@babylonjs/core";
-import createScene1  from "./scene1/createStartSene";
+import createScene1  from "./scene1/createStartScene";
 import createScene2  from "./scene2/createStartScene";
 import createScene3  from "./scene3/createStartScene";
-import createScene4  from "./scene3/createStartScene";
+import createScene4  from "./scene4/createStartScene";
 import createGui     from "./gui/createStartGui";
 import "./main.css";
 
@@ -28,13 +28,13 @@ let scenes: any[] = [];
 let eng = new Engine(canvas, true, {}, true);
 let gui = createGui(eng);
 
-async function main(){
+(async function main(){
 scenes[0] = createScene1(eng);
 scenes[1] = createScene2(eng);
 scenes[2] = createScene3(eng);
 scenes[3] = createScene4(eng);
 setSceneIndex(0);
-};
+})();
 
 export default function setSceneIndex(i: number) {
   console.log("Switching to scene index:", i, scenes[i]);

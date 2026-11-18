@@ -15,6 +15,7 @@ import {
     Color3
   } from "@babylonjs/core";
   
+   import { type SceneData } from "../interfaces";
   
   function createTube(scene: Scene) {
     const myPath = [

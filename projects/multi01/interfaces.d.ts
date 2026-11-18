@@ -17,6 +17,7 @@ export interface SceneData {
       cylinder?: Mesh;
       sphere?:   Mesh;
       torus?:    Mesh;
+      tube?:     Mesh; 
       camera?:   Camera;
 }
 
