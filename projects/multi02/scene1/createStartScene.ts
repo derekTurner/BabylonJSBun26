@@ -131,14 +131,14 @@ export function createStartScene(engine: Engine) {
   const sceneData: SceneData = { scene: new Scene(engine) };
 
   sceneData.box = createBox(sceneData.scene);
-  let lightHemispheric = createHemisphericLight(sceneData.scene);
-  let lightBulb = createPointLight(sceneData.scene);
-  let lightSpot = createSpotLight(sceneData.scene);
-  let lightDirectional =  createDirectionalLight(sceneData.scene);
-  let sphere = createSphere(sceneData.scene);
-  let ground = createGround(sceneData.scene);
-  let camera = createArcRotateCamera(sceneData.scene);
-  let shadowGenerator = createShadows(lightDirectional,sphere,box)
+  sceneData.lightHemispheric = createHemisphericLight(sceneData.scene);
+  sceneData.lightBulb = createPointLight(sceneData.scene);
+  sceneData.lightSpot = createSpotLight(sceneData.scene);
+  sceneData.lightDirectional =  createDirectionalLight(sceneData.scene);
+  sceneData.sphere = createSphere(sceneData.scene);
+  sceneData.ground = createGround(sceneData.scene);
+  sceneData.camera = createArcRotateCamera(sceneData.scene);
+  sceneData.shadowGenerator = createShadows(sceneData.lightDirectional,sceneData.sphere,sceneData.box)
 
   return sceneData;
 }

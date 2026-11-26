@@ -63,7 +63,7 @@ export default function createStartGui(engine: Engine) {
     "but1",
     "1",
     1,
-    "-150px",
+    "-50px",
     "120px",
     guiData.advancedTexture,
   );
@@ -72,7 +72,7 @@ export default function createStartGui(engine: Engine) {
     "but2",
     "2",
     2,
-    "-50px",
+    "50px",
     "120px",
     guiData.advancedTexture,
   );

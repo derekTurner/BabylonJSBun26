@@ -28,7 +28,7 @@ let gui = createGui(eng);
 
 (async function main(){
 scenes[0] = start1(eng);
-scenes[1] = start2(eng);
+scenes[1] = await start2(eng);
 setSceneIndex(0);
 })();
 

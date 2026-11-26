@@ -11,13 +11,13 @@ import {
 
 export interface SceneData {
   scene: Scene;
-  box: Mesh;
-  lightBulb: PointLight;
+  box?: Mesh;
+  lightBulb?: PointLight;
   lightDirectional?: DirectionalLight;
-  lightSpot: SpotLight;
-  lightHemispheric: HemisphericLight;
-  sphere: Mesh;
-  ground: Mesh;
-  camera: Camera;
-  shadowGenerator: ShadowGenerator;
+  lightSpot?: SpotLight;
+  lightHemispheric?: HemisphericLight;
+  sphere?: Mesh;
+  ground?: Mesh;
+  camera?: Camera;
+  shadowGenerator?: ShadowGenerator;
 }
