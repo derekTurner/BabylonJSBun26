@@ -57,6 +57,7 @@ function createArcRotateCamera(scene: Scene) {
   return camera;
 }
 
+
 export default function createStartScene(engine: Engine) {
   let sceneData: SceneData = { scene: new Scene(engine) };
 
